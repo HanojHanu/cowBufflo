@@ -22,6 +22,37 @@ ion-content{
   --ion-text-color: #ffffff;
 }
 
+ion-item {
+  --border-radius : 12%;
+  --inner-padding-start : 0px;
+  --inner-padding-end : 0px;
+  --inner-padding-top : 0px;
+  --padding-bottom : 0px;
+  --padding-start : 0px;
+  --padding-end : 0px;
+  --padding-top : 0px;
+  --padding-bottom : 0px;
+}
+
+ion-input {
+  --background : #363636;
+  --highlight-color-focused: #428cff !important;
+  --highlight-color-valid: #428cff !important;
+  --highlight-color-invalid: #428cff !important;
+}
+
+item-highlight:focus {
+  background: #428cff !important;
+  --highlight-color-focused: #428cff !important;
+  --highlight-color-valid: #428cff !important;
+  --highlight-color-invalid: #428cff !important;
+}
+
+.item-interactive.ion-invalid {
+  --highlight-background: #428cff !important;
+}
+
+
 
 #container {
   text-align: center;
