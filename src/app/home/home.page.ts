@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonInput } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 
@@ -9,14 +10,23 @@ import { ToastController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  wordForm: FormGroup;
+export class HomePage implements OnInit {
 
-  data : any = [  ];
+  @ViewChild('b', { static: false }) bElement: IonInput;
+
+  // one:any;
+  // two:any;
+  // tree:any;
+  // four:any;
+
+  wordForm: FormGroup;
+  userForm: FormGroup;
+
+  data: any = [];
 
   submitted = false;
 
-  hardCode :any;
+  hardCode: any;
 
   constructor(private formBuilder: FormBuilder, public toastController: ToastController) { }
 
@@ -29,40 +39,55 @@ export class HomePage {
       fourLetter: ['', [Validators.required]],
     });
 
-    if(this.hardCode === undefined ){
+    this.userForm = this.formBuilder.group({
+      one: ['', Validators.required],
+      two: ['', Validators.required],
+      three: ['', Validators.required],
+      four: ['', [Validators.required]],
+    });
+
+    if (this.hardCode === undefined) {
       this.autoNumber();
     }
 
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.wordForm.controls; }
+  //get f() { return this.wordForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-
+    console.log('wordForm :', this.wordForm);
     // stop here if form is invalid
-    if (this.wordForm.invalid) {
+    if (this.wordForm.value.firstLetter && this.wordForm.value.secondLetter &&
+      this.wordForm.value.thirdLetter && this.wordForm.value.fourLetter) {
+      // display form values on success
+      this.mainlogic(this.wordForm.value);
+    }
+    else {
       this.presentToast();
-      //console.log('this.wordForm.invalid :', this.wordForm.invalid);
+      console.log('this.wordForm.invalid :', this.wordForm.invalid);
       return;
     }
 
-    // display form values on success
-    //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.wordForm.value, null, 4));
-    this.mainlogic(this.wordForm.value);
   }
+
+  loginForm() {
+    console.log('this.userForm :', this.userForm);
+  }
+
+
 
   mainlogic(letters) {
     console.log('letters :', letters);
     var cow = 0;
     var bufflo = 0;
-    var buffloIndex:any = [];
-    var cowIndex:any = [];
+    var buffloIndex: any = [];
+    var cowIndex: any = [];
     //console.log('Object.keys(letters).length :', Object.keys(letters).length);
     //console.log('Object.keys(letters) :', Object.values(letters));
 
-    
+
 
     var arrletters = Object.values(letters);
     var lettersLength = Object.keys(letters).length;
@@ -75,21 +100,21 @@ export class HomePage {
 
       for (let j = 0; j < arrletters.length; j++) {
         const letterValue = arrletters[j];
-      
+
         /** bufflo */
-        if(systemValue === letterValue && i === j ){
+        if (systemValue === letterValue && i === j) {
           bufflo = bufflo + 1;
           buffloIndex.push(systemValue);
         }
         /** cow */
-        if(!buffloIndex.includes(letterValue) && !cowIndex.includes(j)){
-          if(systemValue === letterValue ){
+        if (!buffloIndex.includes(letterValue) && !cowIndex.includes(j)) {
+          if (systemValue === letterValue) {
             cow = cow + 1;
             cowIndex.push(j);
           }
         }
 
-      } 
+      }
     }
 
     this.wordForm.reset();
@@ -97,8 +122,8 @@ export class HomePage {
     console.log('cow :', cow);
     console.log('bufflo :', bufflo);
     console.log('***************************************************');
-    this.data.push( { word : arrletters.toString(), cow : cow, bufflo :bufflo  } );
-    if(bufflo === 4){
+    this.data.push({ word: arrletters.toString(), cow: cow, bufflo: bufflo });
+    if (bufflo === 4) {
       this.gameover();
       this.autoNumber();
     }
@@ -111,15 +136,26 @@ export class HomePage {
   }
 
 
-  gameover(){
-      this.gameOverToast();
-      this.data = [];
-      this.wordForm.reset();
+  gameover() {
+    this.gameOverToast();
+    this.data = [];
+    this.wordForm.reset();
+  }
+
+  numberOnlyValidation(event: any) {
+    const pattern = /[0-9.,]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
   }
 
   moveFocus(nextElement) {
-    nextElement.focus();
+    //console.log('KeyUp...');
+    nextElement.setFocus();
   }
+
 
 
   async presentToast() {
@@ -130,7 +166,7 @@ export class HomePage {
       duration: 2000
     });
     toast.present();
-  } 
+  }
 
   async gameOverToast() {
     const toast = await this.toastController.create({
@@ -140,7 +176,7 @@ export class HomePage {
       duration: 2000
     });
     toast.present();
-  } 
+  }
 
 
   async presentToastWithOptions() {
@@ -170,7 +206,7 @@ export class HomePage {
 
   autoNumber() {
     var val = Math.floor(1000 + Math.random() * 9000);
-    console.log('val : ', val); 
+    console.log('val : ', val);
     this.hardCode = val;
   }
 

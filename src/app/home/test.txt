@@ -1,0 +1,39 @@
+<div id="wrapper">
+      <div id="dialog">
+
+        <form [formGroup]="wordForm" (ngSubmit)="onSubmit()">
+          <div id="form">
+            <span class="form-group">
+              <input type="tel" formControlName="firstLetter" class="form-control" type="text" maxLength="1" size="1"
+                min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.firstLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.firstLetter.errors.required">firstLetter is required</div>
+              </div> -->
+            </span>
+            <span class="form-group">
+              <input type="tel" formControlName="secondLetter" class="form-control" type="text" maxLength="1" size="1"
+                min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.secondLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.secondLetter.errors.required">secondLetter is required</div>
+              </div> -->
+            </span>
+            <span class="form-group">
+              <input type="tel" formControlName="thirdLetter" class="form-control" type="text" maxLength="1" size="1"
+                min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.thirdLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.thirdLetter.errors.required">thirdLetter is required</div>
+              </div> -->
+            </span>
+            <span class="form-group">
+              <input type="tel" formControlName="fourLetter" class="form-control" type="text" maxLength="1" size="1"
+                min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.fourLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.fourLetter.errors.required">fourLetter is required</div>
+              </div> -->
+            </span>
+          </div>
+          <button class="btn btn-primary btn-embossed">Verify</button>
+          <!-- <ion-button color="primary">Primary</ion-button> -->
+        </form>
+      </div>
+    </div>
