@@ -1,0 +1,7 @@
+{
+  "name": "CowBuffalo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

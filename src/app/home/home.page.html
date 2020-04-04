@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      CB
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <div class="container">
+
+    <div id="wrapper">
+      <div id="dialog">
+
+        <form [formGroup]="wordForm" (ngSubmit)="onSubmit()">
+          <div id="form">
+            <span class="form-group">
+              <input  formControlName="firstLetter" class="form-control" type="text" maxLength="1" size="1"
+                min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.firstLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.firstLetter.errors.required">firstLetter is required</div>
+              </div> -->
+            </span>
+            <span class="form-group">
+              <input  formControlName="secondLetter" class="form-control" type="text" maxLength="1"
+                size="1" min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.secondLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.secondLetter.errors.required">secondLetter is required</div>
+              </div> -->
+            </span>
+            <span class="form-group">
+              <input  formControlName="thirdLetter" class="form-control" type="text" maxLength="1" size="1"
+                min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.thirdLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.thirdLetter.errors.required">thirdLetter is required</div>
+              </div> -->
+            </span>
+            <span class="form-group">
+              <input  formControlName="fourLetter" class="form-control" type="text" maxLength="1" size="1"
+                min="0" max="9" pattern="[0-9]{1}" />
+              <!-- <div *ngIf="submitted && f.fourLetter.errors" class="invalid-feedback">
+                <div *ngIf="f.fourLetter.errors.required">fourLetter is required</div>
+              </div> -->
+            </span>
+          </div>
+          <button class="btn btn-primary btn-embossed">Verify</button>
+          <!-- <ion-button color="primary">Primary</ion-button> -->
+        </form>
+      </div>
+    </div>
+
+
+    <table *ngIf="data?.length > 0" class="table table-sm table-bordered table-striped table-dark">
+      <thead>
+        <tr>
+          <th>word</th>
+          <th>cow</th>
+          <th>bufflo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data">
+          <td>
+            {{ row.word }}
+          </td>
+          <td>
+            {{ row.cow }}
+          </td>
+          <td>
+            {{ row.bufflo }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</ion-content>
