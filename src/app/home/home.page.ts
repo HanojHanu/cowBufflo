@@ -128,7 +128,9 @@ export class HomePage implements OnInit {
     this.data.push({ word: arrletters.toString(), cow: cow, bufflo: bufflo });
     if (bufflo === 4) {
       this.gameover();
-      this.autoNumber();
+      //this.autoNumber();
+      this.hardCode = this.random4Digit();
+      console.log('this.hardCode :', this.hardCode);
     }
 
   }
