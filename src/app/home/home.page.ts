@@ -47,7 +47,9 @@ export class HomePage implements OnInit {
     });
 
     if (this.hardCode === undefined) {
-      this.autoNumber();
+      //this.autoNumber();
+      this.hardCode = this.random4Digit();
+      console.log('this.hardCode :', this.hardCode);
     }
 
   }
@@ -87,8 +89,6 @@ export class HomePage implements OnInit {
     //console.log('Object.keys(letters).length :', Object.keys(letters).length);
     //console.log('Object.keys(letters) :', Object.values(letters));
 
-
-
     var arrletters = Object.values(letters);
     var lettersLength = Object.keys(letters).length;
     this.hardCode = this.hardCode.toString();
@@ -100,28 +100,31 @@ export class HomePage implements OnInit {
 
       for (let j = 0; j < arrletters.length; j++) {
         const letterValue = arrletters[j];
-
+      
         /** bufflo */
-        if (systemValue === letterValue && i === j) {
+        if(systemValue === letterValue && i === j ){
           bufflo = bufflo + 1;
-          buffloIndex.push(systemValue);
+          buffloIndex.push(i);
         }
-        /** cow */
-        if (!buffloIndex.includes(letterValue) && !cowIndex.includes(j)) {
-          if (systemValue === letterValue) {
-            cow = cow + 1;
-            cowIndex.push(j);
-          }
-        }
-
+       
       }
     }
 
+
+    for (let i = 0; i < arrletters.length; i++) {
+      const userValue = arrletters[i];
+        /** cow */
+        if(!buffloIndex.includes(i)){
+          if(arrHardCode.includes(userValue)){
+            cow = cow + 1;
+            cowIndex.push(i);
+          }
+        }
+    }
+
     this.wordForm.reset();
-    console.log('arrletters :', arrletters);
-    console.log('cow :', cow);
-    console.log('bufflo :', bufflo);
-    console.log('***************************************************');
+    //console.log('arrletters :', arrletters, 'cow :', cow, 'bufflo :', bufflo);
+    //console.log('***************************************************');
     this.data.push({ word: arrletters.toString(), cow: cow, bufflo: bufflo });
     if (bufflo === 4) {
       this.gameover();
@@ -183,7 +186,7 @@ export class HomePage implements OnInit {
     const toast = await this.toastController.create({
       header: 'Toast header',
       message: 'Click to Close',
-      position: 'top',
+      position: 'middle',
       buttons: [
         {
           side: 'start',
@@ -207,7 +210,17 @@ export class HomePage implements OnInit {
   autoNumber() {
     var val = Math.floor(1000 + Math.random() * 9000);
     console.log('val : ', val);
+
     this.hardCode = val;
+  }
+
+  random4Digit(){
+    return this.shuffle( "0123456789".split('') ).join('').substring(0,4);
+  }
+  
+  shuffle(o){
+      for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+      return o;
   }
 
 }

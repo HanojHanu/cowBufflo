@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      CB
+      CowBufflo
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,38 +10,52 @@
 
   <div class="container">
 
+    <div class="row">
+      <div class="col" style="text-align: center;">
+        4 digit Code
+      </div>
+    </div>
+    
     <ion-grid>
-      <form [formGroup]="wordForm"  (submit)="onSubmit()" padding-right novalidate>
+      <form [formGroup]="wordForm" (submit)="onSubmit()" padding-right novalidate>
 
-        <ion-row class="ion-align-items-center">
+        <!-- <ion-row class="ion-align-items-center" style="justify-content: center;">
+          <ion-item class="ion-text-center">
+            4 digit Code
+          </ion-item>
+        </ion-row> -->
+
+        <ion-row class="ion-align-items-center" style="justify-content: center;">
           <ion-col size="2" size-sm>
             <ion-item class="ion-text-center item-has-focus">
-              <ion-input  
-                inputmode="tel" type='tel' pattern="tel" maxlength="1"  autofocus="true"
-                (keyup)="moveFocus(b)" formControlName="firstLetter" (keypress)="numberOnlyValidation($event)"  required></ion-input>
+              <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1" autofocus="true" (keyup)="moveFocus(b)"
+                formControlName="firstLetter" (keypress)="numberOnlyValidation($event)" required></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="2" size-sm>
             <ion-item class="ion-text-center item-has-focus">
-              <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1"  #b autofocus="true"
-                (keyup)="moveFocus(c)" formControlName="secondLetter" (keypress)="numberOnlyValidation($event)" required></ion-input>
+              <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1" #b autofocus="true"
+                (keyup)="moveFocus(c)" formControlName="secondLetter" (keypress)="numberOnlyValidation($event)"
+                required></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="2" size-sm>
             <ion-item class="ion-text-center item-has-focus">
-              <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1"  #c autofocus="true"
-                (keyup)="moveFocus(d)" formControlName="thirdLetter" (keypress)="numberOnlyValidation($event)"  required>
+              <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1" #c autofocus="true"
+                (keyup)="moveFocus(d)" formControlName="thirdLetter" (keypress)="numberOnlyValidation($event)" required>
               </ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="2" size-sm>
             <ion-item class="ion-text-center item-has-focus">
-              <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1"  #d autofocus="true"
+              <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1" #d autofocus="true"
                 (keypress)="numberOnlyValidation($event)" formControlName="fourLetter" required></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
-        <ion-button type="submit" color="primary" expand="block" >Submit</ion-button>
+        <ion-row class="ion-align-items-center" style="justify-content: center;">
+          <ion-button type="submit" color="primary">Submit</ion-button>
+        </ion-row>
 
       </form>
 
@@ -52,7 +66,7 @@
     <table *ngIf="data?.length > 0" class="table table-sm table-bordered table-striped table-dark">
       <thead>
         <tr>
-          <th>word</th>
+          <th>4 digit code</th>
           <th>cow</th>
           <th>bufflo</th>
         </tr>
@@ -72,7 +86,7 @@
       </tbody>
     </table>
 
-    
+
 
 
   </div>
