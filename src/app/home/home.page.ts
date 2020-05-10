@@ -28,6 +28,10 @@ export class HomePage implements OnInit {
 
   hardCode: any;
 
+  pattern: any;
+  inputChar: any;
+  inputElements: any = [];
+
   constructor(private formBuilder: FormBuilder, public toastController: ToastController) { }
 
 
@@ -147,18 +151,33 @@ export class HomePage implements OnInit {
     this.wordForm.reset();
   }
 
-  numberOnlyValidation(event: any) {
-    const pattern = /[0-9.,]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {
+  numberOnlyValidation(event: any, nextElement ) {
+    this.pattern = /[0-9.,]/;
+    this.inputChar = String.fromCharCode(event.charCode);
+    
+    if (!this.pattern.test(this.inputChar)) {
       // invalid character, prevent input
       event.preventDefault();
+    }
+    else if (this.inputElements.includes(this.inputChar)){
+      console.log('this.inputElements.includes(this.inputChar) :>> ', this.inputElements.includes(this.inputChar));
+      this.dulicateNum();
+      //event.preventDefault();
+    }
+    else  if (this.pattern.test(this.inputChar)) {
+      this.inputElements.push(this.inputChar);
+      //jumping
+      nextElement.setFocus();
     }
   }
 
   moveFocus(nextElement) {
-    //console.log('KeyUp...');
-    nextElement.setFocus();
+    //console.log('this.inputChar :>> ', this.inputChar);
+    //console.log('this.pattern.test(this.inputChar) :>> ', this.pattern.test(this.inputChar));
+    if (this.pattern.test(this.inputChar)) {
+      //jumping
+      //nextElement.setFocus();
+    }
   }
 
 
@@ -167,6 +186,17 @@ export class HomePage implements OnInit {
     const toast = await this.toastController.create({
       message: ' please enter a 4 digit valid input',
       color: 'secondary',
+      position: 'middle',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
+  async dulicateNum() {
+    const toast = await this.toastController.create({
+      message: `${this.inputChar} already enterd. try diff value`,
+      color: 'warning',
       position: 'middle',
       duration: 2000
     });

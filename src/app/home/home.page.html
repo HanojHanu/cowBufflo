@@ -29,20 +29,20 @@
           <ion-col size="2" size-sm>
             <ion-item class="ion-text-center item-has-focus">
               <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1" autofocus="true" (keyup)="moveFocus(b)"
-                formControlName="firstLetter" (keypress)="numberOnlyValidation($event)" required></ion-input>
+                formControlName="firstLetter" (keypress)="numberOnlyValidation($event,b)" required></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="2" size-sm>
             <ion-item class="ion-text-center item-has-focus">
               <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1" #b autofocus="true"
-                (keyup)="moveFocus(c)" formControlName="secondLetter" (keypress)="numberOnlyValidation($event)"
+                (keyup)="moveFocus(c)" formControlName="secondLetter" (keypress)="numberOnlyValidation($event,c)"
                 required></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="2" size-sm>
             <ion-item class="ion-text-center item-has-focus">
               <ion-input inputmode="tel" type='tel' pattern="tel" maxlength="1" #c autofocus="true"
-                (keyup)="moveFocus(d)" formControlName="thirdLetter" (keypress)="numberOnlyValidation($event)" required>
+                (keyup)="moveFocus(d)" formControlName="thirdLetter" (keypress)="numberOnlyValidation($event,d)" required>
               </ion-input>
             </ion-item>
           </ion-col>
