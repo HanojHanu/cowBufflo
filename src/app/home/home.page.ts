@@ -69,6 +69,7 @@ export class HomePage implements OnInit {
       this.wordForm.value.thirdLetter && this.wordForm.value.fourLetter) {
       // display form values on success
       this.mainlogic(this.wordForm.value);
+      this.inputElements = [];
     }
     else {
       this.presentToast();
